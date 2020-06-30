@@ -27,7 +27,7 @@ class Sms extends Core
 
         if (isset($config['TemplateCode']))//配置中指定模板ID
         {
-            $this->setQueryParam('TemplateCode', $config['SignName']);
+            $this->setQueryParam('TemplateCode', $config['TemplateCode']);
         }
 
         $this->setQueryParam('RegionId', 'cn-hangzhou');
