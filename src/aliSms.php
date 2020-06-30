@@ -2,7 +2,7 @@
 
 namespace everstu\aliyun;
 
-class Sms extends Core
+class aliSms extends Core
 {
     /**
      * 接口请求域名
@@ -31,6 +31,7 @@ class Sms extends Core
         }
 
         $this->setQueryParam('RegionId', 'cn-hangzhou');
+        $this->setQueryParam('Version', '2017-05-25');
     }
 
     /**
@@ -49,6 +50,11 @@ class Sms extends Core
         $this->setQueryParam('Action', __FUNCTION__);
         if (is_array($phone))
         {
+            if(count($phone) > 1000)
+            {
+                throw new \Exception('Too Many Phone Numbers, The Max Is 1000');
+            }
+
             $phone = implode(',', $phone);
         }
         $this->setQueryParam('PhoneNumbers', $phone);
@@ -96,7 +102,7 @@ class Sms extends Core
      * @param string $code 模板code
      * @return $this
      */
-    private function setTemplate($code)
+    public function setTemplateCode($code)
     {
         $this->setQueryParam('TemplateCode', $code);
 
@@ -108,7 +114,7 @@ class Sms extends Core
      * @param string $name 短信签名
      * @return $this
      */
-    private function setSignName($name)
+    public function setSignName($name)
     {
         $this->setQueryParam('SignName', $name);
 
