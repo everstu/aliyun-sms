@@ -1,10 +1,10 @@
 # aliyun-sms
-##阿里云短信API扩展包
+## 阿里云短信API扩展包
 
-#####简易使用实例
-######安装扩展
+##### 简易使用实例
+###### 安装扩展
 `composer require everstu/aliyun-sms=^v1.0`
-######使用扩展
+###### 使用扩展
 ```
 use everstu\aliyun\aliSms;
 $config = [
