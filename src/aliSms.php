@@ -44,19 +44,25 @@ class aliSms extends Core
      */
     public function SendSms($phone, $data = [])
     {
-        $this->validatePhoneNum($phone);
         $checkParamArr = ['PhoneNumbers', 'SignName', 'TemplateCode'];
         $this->setCheckParamArr($checkParamArr);
         $this->setQueryParam('Action', __FUNCTION__);
         if (is_array($phone))
         {
-            if(count($phone) > 1000)
+            if (count($phone) > 1000)
             {
                 throw new \Exception('Too Many Phone Numbers, The Max Is 1000');
             }
 
+            array_walk($phone, [$this, 'validatePhoneNum']);
+
             $phone = implode(',', $phone);
         }
+        else
+        {
+            $this->validatePhoneNum($phone);
+        }
+
         $this->setQueryParam('PhoneNumbers', $phone);
         if (empty($data) == false)
         {
